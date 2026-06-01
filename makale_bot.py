@@ -26,6 +26,14 @@ GOREVLER = [
     {"konu": "borse logo personalizzato", "dil": "İtalyanca"},
     {"konu": "tassen eigen logo", "dil": "Felemenkçe"},
     {"konu": "حقائب بشعار مخصص", "dil": "Arapça"},
+    {"konu": "wholesale bag manufacturer Europe", "dil": "İngilizce"},
+    {"konu": "wholesale bag manufacture", "dil": "İngilizce"},
+    {"konu": "Großhandel Taschenherstellung", "dil": "Almanca"},
+    {"konu": "fabrication sacs en gros", "dil": "Fransızca"},
+    {"konu": "produzione borse all'ingrosso", "dil": "İtalyanca"},
+    {"konu": "groothandel tassenproductie", "dil": "Felemenkçe"},
+    {"konu": "تصنيع الحقائب بالجملة", "dil": "Arapça"},
+    {"konu": "toptan çanta imalatı", "dil": "Türkçe"},
 ]
 
 def makale_yaz(konu, dil):
