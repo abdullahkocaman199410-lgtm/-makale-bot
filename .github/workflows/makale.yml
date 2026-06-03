@@ -24,3 +24,4 @@ jobs:
           WP_APP_PASSWORD: ${{ secrets.WP_APP_PASSWORD }}
         run: python makale_bot.py
 
+
