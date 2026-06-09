@@ -1,4 +1,5 @@
 import requests
+UNSPLASH_KEY = os.environ.get("UNSPLASH_ACCESS_KEY")
 import json
 import time
 import os
@@ -40,6 +41,18 @@ GOREVLER = [
     {"konu": "حقيبة حفاضات OEM مخصصة", "dil": "Arapça"},
     {"konu": "مصنع حقائب بالجملة تركيا", "dil": "Arapça"},
 ]
+
+def gorsel_getir(konu):
+    try:
+        url = f"https://api.unsplash.com/search/photos?query={konu}&per_page=1&client_id={UNSPLASH_KEY}"
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            if data["results"]:
+                return data["results"][0]["urls"]["regular"]
+    except:
+        pass
+    return None
 
 def son_makaleleri_getir():
     try:
