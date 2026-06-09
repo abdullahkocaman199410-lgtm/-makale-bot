@@ -35,6 +35,17 @@ GOREVLER = [
     {"konu": "toptan çanta imalatı", "dil": "Türkçe"},
 ]
 
+def son_makaleleri_getir():
+    try:
+        url = f"{WP_URL}/wp-json/wp/v2/posts?per_page=5&status=publish&orderby=date"
+        response = requests.get(url)
+        if response.status_code == 200:
+            posts = response.json()
+            return [(p['title']['rendered'], p['link']) for p in posts]
+    except:
+        pass
+    return []
+
 def makale_yaz(konu, dil):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
     prompt = f"""Write a comprehensive, SEO-optimized blog article about '{konu}' in {dil} language.
