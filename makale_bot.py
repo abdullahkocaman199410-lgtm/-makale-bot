@@ -45,7 +45,7 @@ def makale_yaz(konu, dil):
     - At least 3 subheadings
     - Detailed content under each subheading
     - Conclusion paragraph
-    - Minimum 800 words
+    - Minimum 2500 words
     Write in HTML format using <h2> for subheadings and <p> for paragraphs.
     Write ONLY in {dil} language."""
     
