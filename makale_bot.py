@@ -68,7 +68,7 @@ def makale_yaz(konu, dil):
         print(f"Hata: {data}")
         return None, None
 
-def wordpress_yayinla(baslik, icerik):
+def wordpress_yayinla(baslik, icerik, meta_aciklama=""):
     url = f"{WP_URL}/wp-json/wp/v2/posts"
     auth = (WP_USER, WP_APP_PASSWORD)
     payload = {{
