@@ -2,7 +2,7 @@ name: Makale Bot
 
 on:
   schedule:
-    - cron: '0 4 * * 1,3,5'
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 jobs:
