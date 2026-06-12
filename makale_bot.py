@@ -82,7 +82,7 @@ def makale_yaz(konu, dil):
     - Write ONLY in {dil} language
     - The title must be catchy and include the keyword naturally"""
 
-    payload = {{"contents": [{{"parts": [{{"text": prompt}}]}}]}}
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
     response = requests.post(url, json=payload)
     data = response.json()
     try:
