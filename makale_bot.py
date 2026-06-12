@@ -1,4 +1,5 @@
 import requests
+import os
 UNSPLASH_KEY = os.environ.get("UNSPLASH_ACCESS_KEY")
 import json
 import time
