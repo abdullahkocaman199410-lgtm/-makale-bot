@@ -102,11 +102,11 @@ def makale_yaz(konu, dil):
 def wordpress_yayinla(baslik, icerik, meta_aciklama=""):
     url = f"{WP_URL}/wp-json/wp/v2/posts"
     auth = (WP_USER, WP_APP_PASSWORD)
-    payload = {{
+    payload = {
         "title": baslik,
         "content": icerik,
         "status": "publish"
-    }}
+    }
     response = requests.post(url, json=payload, auth=auth)
     if response.status_code == 201:
         post = response.json()
