@@ -43,6 +43,19 @@ GOREVLER = [
     {"konu": "مصنع حقائب بالجملة تركيا", "dil": "Arapça"},
 ]
 
+def yukle_gorsel(gorsel_url):
+    try:
+        img_data = requests.get(gorsel_url).content
+        media_url = f"{WP_URL}/wp-json/wp/v2/media"
+        auth = (WP_USER, WP_APP_PASSWORD)
+        headers = {"Content-Disposition": "attachment; filename=gorsel.jpg", "Content-Type": "image/jpeg"}
+        response = requests.post(media_url, data=img_data, headers=headers, auth=auth)
+        if response.status_code == 201:
+            return response.json()["id"]
+    except:
+        pass
+    return None
+
 def gorsel_getir(konu):
     try:
         url = f"https://api.unsplash.com/search/photos?query={konu}&per_page=1&client_id={UNSPLASH_KEY}"
@@ -99,7 +112,7 @@ def makale_yaz(konu, dil):
         print(f"Hata: {data}")
         return None, None
 
-def wordpress_yayinla(baslik, icerik, meta_aciklama=""):
+def wordpress_yayinla(baslik, icerik, meta_aciklama="", gorsel_url=None):
     url = f"{WP_URL}/wp-json/wp/v2/posts"
     auth = (WP_USER, WP_APP_PASSWORD)
     payload = {
@@ -107,6 +120,8 @@ def wordpress_yayinla(baslik, icerik, meta_aciklama=""):
         "content": icerik,
         "status": "publish"
     }
+    if gorsel_url:
+        payload["featured_media"] = yukle_gorsel(gorsel_url)
     response = requests.post(url, json=payload, auth=auth)
     if response.status_code == 201:
         post = response.json()
@@ -122,7 +137,8 @@ def main():
         print(f"[{i}/{len(GOREVLER)}] 📝 {gorev['dil']}: {gorev['konu']}")
         baslik, icerik = makale_yaz(gorev["konu"], gorev["dil"])
         if icerik:
-            wordpress_yayinla(baslik, icerik)
+            gorsel_url = gorsel_getir(gorev["konu"])
+            wordpress_yayinla(baslik, icerik, gorsel_url=gorsel_url)
         print(f"⏳ 5 saniye bekleniyor...\n")
         time.sleep(5)
     print("✅ Tüm makaleler tamamlandı!")
