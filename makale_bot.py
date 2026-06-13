@@ -132,8 +132,11 @@ def wordpress_yayinla(baslik, icerik, meta_aciklama="", gorsel_url=None):
         return False
 
 def main():
-    print("🚀 Çok dilli makale botu başlıyor...\n")
-    for i, gorev in enumerate(GOREVLER, 1):
+    import random
+    adet = random.randint(11, 15)
+    secilen = random.sample(GOREVLER, adet)
+    print(f"🚀 Bugün {adet} makale yazılacak...\n")
+    for i, gorev in enumerate(secilen, 1):
         print(f"[{i}/{len(GOREVLER)}] 📝 {gorev['dil']}: {gorev['konu']}")
         baslik, icerik = makale_yaz(gorev["konu"], gorev["dil"])
         if icerik:
