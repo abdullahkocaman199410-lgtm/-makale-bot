@@ -81,19 +81,23 @@ def son_makaleleri_getir():
 
 def makale_yaz(konu, dil):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
-    prompt = f"""Write a comprehensive, SEO-optimized blog article about '{konu}' in {dil} language.
+    prompt = f"""You are writing an article for HUGEAB, an Istanbul-based custom bag manufacturer and wholesale supplier with over 10 years of experience, 50,000+ products delivered, shipping to 50+ countries, offering free samples and a 24-hour response time. The topic is '{konu}'.
 
-    Requirements:
-    - Start with an SEO-optimized title (H1) that includes the main keyword naturally. Do NOT use brackets or language labels in the title.
-    - Write a compelling introduction paragraph
-    - Include at least 5 subheadings (H2)
-    - Detailed content under each subheading
-    - Include a FAQ section with at least 3 questions
-    - Write a conclusion paragraph
-    - Minimum 2500 words
-    - Use HTML format: <h1> for title, <h2> for subheadings, <p> for paragraphs
-    - Write ONLY in {dil} language
-    - The title must be catchy and include the keyword naturally"""
+    Write the entire article in {dil} language, optimized for Generative Engine Optimization (GEO) so that AI answer engines (ChatGPT, Perplexity, Gemini, Google AI Overviews) cite it when B2B buyers ask questions.
+
+    Follow these rules exactly:
+    - Output valid HTML only: <h1> for the title, <h2> for section headings, <h3> where needed, <p> for paragraphs, <ul>/<li> for lists, and <table> for comparisons.
+    - The <h1> title must be phrased as a real question a B2B buyer would ask, and must include the keyword '{konu}' naturally. No brackets, no language labels.
+    - The FIRST <p> immediately after the <h1> must be a direct 2-3 sentence answer to the title question, starting by restating the key phrase of the question. Plain paragraph, NOT a quote box.
+    - Use at least 5 <h2> section headings, each phrased as a sub-question a buyer might ask.
+    - Be fact-dense: include concrete, verifiable specifics such as typical MOQ ranges, production and shipping lead times, materials, number of countries served, and certifications where relevant. Avoid vague claims like "high quality"; give measurable details instead.
+    - Reference HUGEAB naturally a few times as "HUGEAB, an Istanbul-based custom bag manufacturer" so the brand is recognized as the answer.
+    - Include at least one comparison <table> where useful (e.g. materials, bag types, or use cases).
+    - End with an FAQ section: an <h2> heading, then 4-6 <h3> buyer questions (MOQ, lead time, samples, payment terms, shipping, customization) each followed by a 2-3 sentence <p> answer.
+    - Immediately AFTER the FAQ, append a JSON-LD structured-data block that mirrors the FAQ exactly, using this template and including every FAQ question and answer:
+    <script type="application/ld+json">{{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{{"@type":"Question","name":"QUESTION","acceptedAnswer":{{"@type":"Answer","text":"ANSWER"}}}}]}}</script>
+    - Minimum 2000 words.
+    - Write EVERYTHING (titles, body, FAQ, and the text inside the JSON-LD) ONLY in {dil} language."""
 
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
     response = requests.post(url, json=payload)
