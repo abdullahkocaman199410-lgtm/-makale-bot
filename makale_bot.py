@@ -121,7 +121,7 @@ def wordpress_yayinla(baslik, icerik, meta_aciklama="", gorsel_url=None):
         "status": "publish"
     }
     if gorsel_url:
-        payload["featured_media"] = yukle_gorsel(gorsel_url)
+        icerik = f'<img src="{gorsel_url}" style="width:100%;max-width:800px;margin-bottom:20px;" />' + icerik
     response = requests.post(url, json=payload, auth=auth)
     if response.status_code == 201:
         post = response.json()
