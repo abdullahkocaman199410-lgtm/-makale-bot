@@ -58,12 +58,14 @@ def yukle_gorsel(gorsel_url):
 
 def gorsel_getir(konu):
     try:
-        url = f"https://api.unsplash.com/search/photos?query={konu}&per_page=1&client_id={UNSPLASH_KEY}"
+        url = f"{WP_URL}/wp-json/wp/v2/media?per_page=100&media_type=image"
         response = requests.get(url)
         if response.status_code == 200:
-            data = response.json()
-            if data["results"]:
-                return data["results"][0]["urls"]["regular"]
+            medyalar = response.json()
+            if medyalar:
+                import random
+                secilen = random.choice(medyalar)
+                return secilen["id"]
     except:
         pass
     return None
