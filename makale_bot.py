@@ -147,7 +147,7 @@ def main():
             gorsel_url = gorsel_getir(gorev["konu"])
             wordpress_yayinla(baslik, icerik, gorsel_url=gorsel_url)
         print(f"⏳ 5 saniye bekleniyor...\n")
-        time.sleep(5)
+        time.sleep(480)
     print("✅ Tüm makaleler tamamlandı!")
 
 if __name__ == "__main__":
